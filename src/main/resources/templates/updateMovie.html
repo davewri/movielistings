@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link Bootstrap 4 from CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Update Movie</title>
+</head>
+<body>
+<!--/*/ <th:block th:include="fragments/navigation :: navigation"></th:block> /*/-->
+<p></p>
+<p></p>
+<!-- Bootstrap-->
+<div class="container">
+    <!-- Content row with 2 columns-->
+    <div class="row">
+        <!-- Column 1 - Genres List -->
+        <div class="col-sm-3">
+
+        </div> <!-- End Genres col-->
+
+        <!-- Column 2 - Movie List -->
+        <div class="col-sm-9">
+            <h3>Update Movie</h3>
+            <!-- https://getbootstrap.com/docs/4.0/components/forms/ -->
+            <form th:object="${movie}" th:action="@{/updateMovie}" method="post" class="needs-validation">
+                <input type="hidden" th:field="*{MovieId}"/>
+                <div class="form-group">
+                    <label for="MovieName">Movie Name</label>
+                    <input th:field="*{MovieName}" type="text" class="form-control" placeholder=""  required>
+                </div>
+                <div class="form-group">
+                    <label for="Director">Director</label>
+                    <input th:field="*{Director}" type="text" class="form-control" placeholder=""  required>
+                </div>
+                <div class="form-group">
+                    <label for="MainCelebrity">Main Celebrity</label>
+                    <input th:field="*{MainCelebrity}" type="text" class="form-control" placeholder=""  required>
+                </div>
+                <div class="form-group">
+                    <label for="movieGenre">Genre</label>
+                    <select th:field="*{GenreId}" class="form-control" required>
+                        <option value="0">choose genre</option>
+                        <option th:each="gen : ${genres}"
+                                th:value="${gen.GenreId}"
+                                th:utext="${gen.GenreType}">
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Certificate">Movie Certification</label>
+                    <input th:field="*{Certificate}" type="text" class="form-control" placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <label for="ReleaseYear">Year of Movie Release</label>
+                    <input th:field="*{ReleaseYear}" type="number" class="form-control" placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <label for="StarRating">Star Rating</label>
+                    <input th:field="*{StarRating}" type="number" class="form-control" placeholder="" required>
+                </div>
+                <button type="submit" class="btn btn-warning">Submit</button>
+                <a href="/movies" th:href="@{/movie}" class="btn btn-primary" role="button">Cancel</a>
+            </form>
+        </div> <!-- End Movies col -->
+    </div> <!-- End row -->
+</div> <!-- End container -->
+
+<!-- JavaScript dependencies for Bootstrap 4-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <!--/*/ <th:block th:include="fragments/header :: head"></th:block> /*/-->
+    <title>Movie database</title>
+</head>
+
+<body>
+<!--/*/ <th:block th:include="fragments/navigation :: navigation"></th:block> /*/-->
+
+<!-- Bootstrap Container-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2">
+            <ul class="list-group" th:if="${not #lists.isEmpty(genres)}">
+                <li class="list-group-item"><a href="/movie/?gen=0">All</a></li>
+                <!-- Repeating <li> - for each department -->
+                <li class="list-group-item" th:each="genre : ${genres}">
+                    <a href="#" th:href="@{'/movie/?gen=' + ${genre.GenreId}}" th:text="${genre.GenreType}"></a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-9">
+            <h3>Movies</h3>
+
+            <!-- Search box-->
+            <!-- mb-4 BootStrap class adds a bottom margin -->
+            <div class="mb-4"> <!-- https://getbootstrap.com/docs/4.0/utilities/spacing/ -->
+                <!-- https://getbootstrap.com/docs/4.0/components/forms/ -->
+                <form th:action="@{/searchMovies}" method="get" class="form-inline needs-validation">
+                    <div class="form-group">
+                        <input id="search" name="search" type="text" class="form-control" placeholder="search movies"  required>
+                    </div>
+                    <button type="submit" class="btn btn-primary"><span class="oi oi-magnifying-glass"></span></button>
+                </form>
+            </div>
+
+            <!-- mb-4 BootStrap class adds a bottom margin -->
+            <!-- https://www.w3schools.com/bootstrap4/bootstrap_buttons.asp -->
+            <!-- If set (value not null) then show the message from flash -->
+            <div th:if="${message} != null" class="alert alert-success alert-dismissible fade show mb-2">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <h6 th:text="${message}"></h6>
+            </div>
+
+            <!-- If set (value not null) then show the error from flash -->
+            <div th:if="${error} != null" class="alert alert-danger alert-dismissible fade show mb-2">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <h6 th:text="${error}"></h6>
+            </div>
+
+            <!-- Add table if the movies list contains movies-->
+            <!-- Bootstrap: https://getbootstrap.com/docs/4.0/content/tables/-->
+            <table class="table table-bordered" th:if="${not #lists.isEmpty(movies)}">
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Director</th>
+                    <th>Main Celebrity</th>
+                    <th>Certification</th>
+                    <th>Release Year</th>
+                    <th>Star Rating</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr th:each="movie : ${movies}">
+                    <td th:text="${movie.MovieId}"></td>
+                    <td th:text="${movie.MovieName}">Movie Name</td>
+                    <td th:text="${movie.Director}">Director</td>
+                    <td th:text="${movie.MainCelebrity}">Main Celebrity</td>
+                    <td th:text="${movie.Certificate}">Certificate</td>
+                    <td th:text="${movie.ReleaseYear}">Release Year</td>
+                    <td th:text="${movie.StarRating}">Star Rating</td>
+                    <td><a th:href="@{'/updateMovie/?id=' + ${movie.MovieId}}" class="btn-sm btn-danger" role="button"><span class="oi oi-pencil"></span></a></td>
+                    <td><a th:href="@{'/deleteMovie/?id=' + ${movie.MovieId}}" onclick="return confirmDelete();" class="btn-sm btn-danger" role="button"><span class="oi oi-trash"></span></a></td>
+                </tr>
+            </table>
+            <p>
+                <a href="/newMovie" th:href="@{/newMovie}" class="btn btn-outline-primary" role="button">Add Movie</a>
+            </p>
+        </div> <!-- End Movie col -->
+    </div> <!-- End row -->
+</div> <!-- End container -->
+<!-- JavaScript dependencies for Bootstrap 4-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script>
+        // JavaScript function returns true if user clicks yes, otherwise, false
+        // true - proceed (open link)
+        // false - cancel
+        function confirmDelete() {
+            return confirm('Are you sure?');
+        }
+    </script>
+
+<div th:insert="~{fragments/footer :: footer}">...</div>
+</body>
+</html>

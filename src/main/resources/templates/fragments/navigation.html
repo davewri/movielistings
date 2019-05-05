@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <div th:fragment="navigation">
+            <!-- Site Navigation fragment -->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/" th:href="@{/}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about" th:href="@{/about}">About Us</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/movie" th:href="@{/movie}">Movie Database</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div style="margin: 2em;"></div>
+            <!-- End Site Navigation fragment -->
+        </div>
+    </body>
+</html>
