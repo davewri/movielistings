@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <!--/*/ <th:block th:include="fragments/header :: head"></th:block> /*/-->
-    <title>Movie database</title>
+    <title>Movie Listing</title>
 </head>
 
 <body>
@@ -21,7 +21,7 @@
             </ul>
         </div>
         <div class="col-sm-9">
-            <h3>Movies</h3>
+            <h3>Movie Listing</h3>
 
             <!-- Search box-->
             <!-- mb-4 BootStrap class adds a bottom margin -->
@@ -51,29 +51,33 @@
 
             <!-- Add table if the movies list contains movies-->
             <!-- Bootstrap: https://getbootstrap.com/docs/4.0/content/tables/-->
-            <table class="table table-bordered" th:if="${not #lists.isEmpty(movies)}">
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Director</th>
-                    <th>Main Celebrity</th>
-                    <th>Certification</th>
-                    <th>Release Year</th>
-                    <th>Star Rating</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                <tr th:each="movie : ${movies}">
-                    <td th:text="${movie.MovieId}"></td>
-                    <td th:text="${movie.MovieName}">Movie Name</td>
-                    <td th:text="${movie.Director}">Director</td>
-                    <td th:text="${movie.MainCelebrity}">Main Celebrity</td>
-                    <td th:text="${movie.Certificate}">Certificate</td>
-                    <td th:text="${movie.ReleaseYear}">Release Year</td>
-                    <td th:text="${movie.StarRating}">Star Rating</td>
-                    <td><a th:href="@{'/updateMovie/?id=' + ${movie.MovieId}}" class="btn-sm btn-danger" role="button"><span class="oi oi-pencil"></span></a></td>
-                    <td><a th:href="@{'/deleteMovie/?id=' + ${movie.MovieId}}" onclick="return confirmDelete();" class="btn-sm btn-danger" role="button"><span class="oi oi-trash"></span></a></td>
-                </tr>
+            <table class="table table-bordered table-hover" th:if="${not #lists.isEmpty(movies)}">
+                <thead>
+                    <tr>
+                        <th style="text-align:center;">Id</th>
+                        <th style="text-align:left;">Name</th>
+                        <th style="text-align:left;">Director</th>
+                        <th style="text-align:left;">Main Celebrity</th>
+                        <th style="text-align:center;">Certification</th>
+                        <th style="text-align:center;">Release Year</th>
+                        <th style="text-align:center;">Star Rating</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="movie : ${movies}">
+                        <td style="text-align:center;" th:text="${movie.MovieId}"></td>
+                        <td style="text-align:left;" th:text="${movie.MovieName}">Movie Name</td>
+                        <td style="text-align:left;" th:text="${movie.Director}">Director</td>
+                        <td style="text-align:left;" th:text="${movie.MainCelebrity}">Main Celebrity</td>
+                        <td style="text-align:center;" th:text="${movie.Certificate}">Certificate</td>
+                        <td style="text-align:center;" th:text="${movie.ReleaseYear}">Release Year</td>
+                        <td style="text-align:center;" th:text="${movie.StarRating}">Star Rating</td>
+                        <td><a th:href="@{'/updateMovie/?id=' + ${movie.MovieId}}" class="btn-sm btn-danger" role="button"><span class="oi oi-pencil"></span></a></td>
+                        <td><a th:href="@{'/deleteMovie/?id=' + ${movie.MovieId}}" onclick="return confirmDelete();" class="btn-sm btn-danger" role="button"><span class="oi oi-trash"></span></a></td>
+                    </tr>
+                </tbody>
             </table>
             <p>
                 <a href="/newMovie" th:href="@{/newMovie}" class="btn btn-outline-primary" role="button">Add Movie</a>
