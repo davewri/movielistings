@@ -18,9 +18,10 @@ import java.util.List;
 @Repository
 public class MovieDaoImpl  implements MovieDao {
 
-    private final String SELECT_SQL = "SELECT * FROM dbo.Movie ORDER BY ReleaseYear DESC";
-    private final String SELECT_SQL_BY_ID = "SELECT * FROM dbo.Movie WHERE MovieId = ? ORDER BY ReleaseYear DESC";
-    private final String SELECT_SQL_BY_GEN_ID = "SELECT * FROM dbo.Movie WHERE GenreId = ? ORDER BY ReleaseYear DESC";
+    //Order movies by movie id ascending
+    private final String SELECT_SQL = "SELECT * FROM dbo.Movie ORDER BY MovieId ASC";
+    private final String SELECT_SQL_BY_ID = "SELECT * FROM dbo.Movie WHERE MovieId = ? ORDER BY MovieId ASC";
+    private final String SELECT_SQL_BY_GEN_ID = "SELECT * FROM dbo.Movie WHERE GenreId = ? ORDER BY MovieId ASC";
 
     private final String SELECT_SQL_BY_SEARCH = "SELECT * FROM dbo.Movie WHERE MovieName like :search or MainCelebrity like :search";
     private final String INSERT_SQL = "INSERT INTO Movie(MovieName,GenreId,Director,MainCelebrity,Certificate,ReleaseYear,StarRating) values(?,?,?,?,?,?,?)";
