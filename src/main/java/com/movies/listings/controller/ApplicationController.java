@@ -148,7 +148,7 @@ public class ApplicationController {
 
         if (newMovie != null) {
             redirAttrs.addFlashAttribute("message", "New movie added - id: " + newMovie.getMovieId());
-            System.out.println("New movie was added " + newMovie.getMovieName());
+            System.out.println(newMovie.getMovieName() + " was added ");
         }
         else {
             redirAttrs.addFlashAttribute("error", "error: movie not added");
